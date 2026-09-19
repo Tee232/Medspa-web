@@ -14,7 +14,8 @@ export function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const from = (location.state as { from?: { pathname: string } })?.from?.pathname || "/dashboard";
+  const rawFrom = (location.state as { from?: { pathname: string } })?.from?.pathname;
+  const target = rawFrom && rawFrom !== "/" ? rawFrom : "/dashboard";
 
   const handleQuickRoleSelect = (role: UserRole) => {
     setError(null);
@@ -45,7 +46,7 @@ export function LoginPage() {
       if (email.includes("daniel") || email.includes("manager")) role = "manager";
 
       await login(email, password, role);
-      navigate(from, { replace: true });
+      navigate(target, { replace: true });
     } catch {
       setError("Failed to sign in. Please check your credentials.");
     }

@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { useAuth } from "@/app/AuthContext";
 import { AppShell } from "@/app/AppShell";
 import { RequireAuth } from "@/app/RequireAuth";
 import { RequireRole } from "@/app/RequireRole";
@@ -19,9 +20,15 @@ import { PerformancePage } from "@/pages/retention/performance/PerformancePage";
 import { SettingsPage } from "@/pages/settings/SettingsPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 
+function RootRedirect() {
+  const { isAuthenticated } = useAuth();
+  return <Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />;
+}
+
 export function AppRoutes() {
   return (
     <Routes>
+      <Route path="/" element={<RootRedirect />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
@@ -34,7 +41,6 @@ export function AppRoutes() {
           </RequireAuth>
         }
       >
-        <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="customer-requests" element={<CustomerRequestsPage />} />
 
