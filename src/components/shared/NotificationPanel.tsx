@@ -22,7 +22,7 @@ export function NotificationPanel({ notifications, onItemClick, onMarkAllRead, c
   const hasUnread = notifications.some((n) => !n.read);
 
   return (
-    <div role="menu" aria-label="Notifications" className={cn("w-[360px] overflow-hidden rounded-[16px] border border-[#E5E7EB] bg-white shadow-lg", className)}>
+    <div role="menu" aria-label="Notifications" className={cn("w-[calc(100vw-32px)] sm:w-[360px] max-w-[360px] overflow-hidden rounded-[16px] border border-[#E5E7EB] bg-white shadow-lg", className)}>
       <div className="flex items-center justify-between border-b border-[#E8E4DF] px-4 py-3">
         <span className="font-heading text-sm font-bold text-[#1C1C1A]">Notifications</span>
         {hasUnread && (

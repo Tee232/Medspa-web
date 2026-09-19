@@ -140,18 +140,20 @@ export function CustomerRequestsPage() {
       {/* Filter Tabs & Search Bar */}
       <Card className="mb-6 p-4">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <SegmentedTabs
-            options={[
-              { value: "all", label: "All", count: stats.total },
-              { value: "consultation", label: "Consultations", count: stats.consultations },
-              { value: "inquiry", label: "Inquiries", count: stats.inquiries },
-              { value: "pending", label: "Pending", count: stats.pending },
-              { value: "responded", label: "Responded", count: stats.responded },
-              { value: "converted", label: "Converted", count: stats.converted },
-            ]}
-            value={activeTab}
-            onChange={(val) => setActiveTab(val as TabFilter)}
-          />
+          <div className="overflow-x-auto">
+            <SegmentedTabs
+              options={[
+                { value: "all", label: "All", count: stats.total },
+                { value: "consultation", label: "Consultations", count: stats.consultations },
+                { value: "inquiry", label: "Inquiries", count: stats.inquiries },
+                { value: "pending", label: "Pending", count: stats.pending },
+                { value: "responded", label: "Responded", count: stats.responded },
+                { value: "converted", label: "Converted", count: stats.converted },
+              ]}
+              value={activeTab}
+              onChange={(val) => setActiveTab(val as TabFilter)}
+            />
+          </div>
 
           <SearchBar
             placeholder="Search by name, email, treatment, or message..."

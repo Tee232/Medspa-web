@@ -132,9 +132,9 @@ export function ClientsPage() {
               <p className="mt-1 font-body text-sm text-[#6B7280]">View and manage all clients.</p>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="secondary" leftIcon={<Filter className="h-4 w-4" />}>Filter</Button>
-              <Button variant="secondary" leftIcon={<Download className="h-4 w-4" />}>Export</Button>
-              <Button variant="primary" leftIcon={<Plus className="h-4 w-4" />} onClick={() => setAddClientOpen(true)}>Add Client</Button>
+              <Button variant="secondary" leftIcon={<Filter className="h-4 w-4" />} className="px-2.5 sm:px-4"><span className="hidden sm:inline">Filter</span></Button>
+              <Button variant="secondary" leftIcon={<Download className="h-4 w-4" />} className="px-2.5 sm:px-4"><span className="hidden sm:inline">Export</span></Button>
+              <Button variant="primary" leftIcon={<Plus className="h-4 w-4" />} onClick={() => setAddClientOpen(true)}><span className="hidden sm:inline">Add Client</span></Button>
             </div>
           </div>
 
@@ -144,7 +144,7 @@ export function ClientsPage() {
             <StatCard icon={<AlertTriangle className="h-[18px] w-[18px]" />} iconBg="#FEF9EC" iconColor="#C9A96E" label="At-Risk Clients" value={stats.atRisk} />
           </div>
 
-          <div className="mb-4 flex flex-wrap items-center gap-3">
+          <div className="mb-4 flex flex-wrap items-center gap-3 overflow-x-auto">
             <SegmentedTabs<TabFilter>
               value={activeTab}
               onChange={handleTabChange}
@@ -156,7 +156,7 @@ export function ClientsPage() {
                 { value: "new", label: "New" },
               ]}
             />
-            <SearchBar placeholder="Search clients..." value={query} onChange={(v) => { setQuery(v); setPage(1); }} className="max-w-xs flex-1" aria-label="Search clients" />
+            <SearchBar placeholder="Search clients..." value={query} onChange={(v) => { setQuery(v); setPage(1); }} className="min-w-[180px] flex-1" aria-label="Search clients" />
           </div>
 
           <div className="overflow-x-auto">

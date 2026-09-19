@@ -198,55 +198,62 @@ export function AppointmentsPage() {
     <div className="flex h-full flex-col xl:flex-row">
       <div className="min-w-0 flex-1 overflow-y-auto">
         <div className="p-5 sm:p-6 lg:p-8 xl:pr-6">
-          <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
-            <div>
-              <h1 className="font-heading text-2xl font-bold text-[#1C1C1A]">Appointments</h1>
-              <p className="mt-1 font-body text-sm text-[#6B7280]">{formatDateLabel(new Date().toISOString())} · {stats.total} appointments</p>
-            </div>
-            <Button variant="primary" leftIcon={<Plus className="h-4 w-4" />} onClick={() => setNewApptOpen(true)}>New Appointment</Button>
+          <div className="mb-5">
+            <h1 className="font-heading text-2xl font-bold text-[#1C1C1A]">Appointments</h1>
+            <p className="mt-1 font-body text-sm text-[#6B7280]">{formatDateLabel(new Date().toISOString())} · {stats.total} appointments</p>
           </div>
 
-          <div className="mb-5 flex flex-wrap items-center gap-3">
-            <SegmentedTabs<ViewTab>
-              value={activeTab}
-              onChange={setActiveTab}
-              options={[{ value: "calendar", label: "Calendar" }, { value: "list", label: "List" }]}
-            />
+          <div className="mb-5 flex flex-col gap-3">
+            {/* Row 1: view tabs + action button */}
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <SegmentedTabs<ViewTab>
+                value={activeTab}
+                onChange={setActiveTab}
+                options={[{ value: "calendar", label: "Calendar" }, { value: "list", label: "List" }]}
+              />
+              <Button variant="primary" leftIcon={<Plus className="h-4 w-4" />} onClick={() => setNewApptOpen(true)}>
+                <span className="hidden sm:inline">New Appointment</span>
+                <span className="sm:hidden">New</span>
+              </Button>
+            </div>
 
-            {activeTab === "calendar" && (
-              <>
-                <SegmentedTabs<ViewRange>
-                  value={viewRange}
-                  onChange={setViewRange}
-                  options={[{ value: "day", label: "Day" }, { value: "week", label: "Week" }, { value: "month", label: "Month" }]}
-                />
-                <div className="flex items-center gap-1">
-                  <button type="button" onClick={() => shiftReferenceDate(-1)} aria-label="Previous" className="flex h-8 w-8 items-center justify-center rounded-full text-[#6B7280] hover:bg-[#F3F0EB]">
-                    <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                  </button>
-                  <button type="button" onClick={() => setReferenceDate(new Date())} className="rounded-full px-3 py-1 font-body text-xs font-medium text-[#1A6B52] hover:bg-[#F3F0EB]">
-                    Today
-                  </button>
-                  <button type="button" onClick={() => shiftReferenceDate(1)} aria-label="Next" className="flex h-8 w-8 items-center justify-center rounded-full text-[#6B7280] hover:bg-[#F3F0EB]">
-                    <ChevronRight className="h-4 w-4" aria-hidden="true" />
-                  </button>
-                </div>
-              </>
-            )}
+            {/* Row 2: calendar controls + filter + export */}
+            <div className="flex flex-wrap items-center gap-2 overflow-x-auto">
+              {activeTab === "calendar" && (
+                <>
+                  <SegmentedTabs<ViewRange>
+                    value={viewRange}
+                    onChange={setViewRange}
+                    options={[{ value: "day", label: "Day" }, { value: "week", label: "Week" }, { value: "month", label: "Month" }]}
+                  />
+                  <div className="flex items-center gap-1">
+                    <button type="button" onClick={() => shiftReferenceDate(-1)} aria-label="Previous" className="flex h-8 w-8 items-center justify-center rounded-full text-[#6B7280] hover:bg-[#F3F0EB]">
+                      <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                    </button>
+                    <button type="button" onClick={() => setReferenceDate(new Date())} className="rounded-full px-3 py-1 font-body text-xs font-medium text-[#1A6B52] hover:bg-[#F3F0EB]">
+                      Today
+                    </button>
+                    <button type="button" onClick={() => shiftReferenceDate(1)} aria-label="Next" className="flex h-8 w-8 items-center justify-center rounded-full text-[#6B7280] hover:bg-[#F3F0EB]">
+                      <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                    </button>
+                  </div>
+                </>
+              )}
 
-            <Dropdown<StatusFilter>
-              className="w-44"
-              placeholder="Filter status"
-              value={statusFilter === "all" ? null : statusFilter}
-              onChange={setStatusFilter}
-              options={STATUS_FILTER_OPTIONS.filter((o) => o.value !== "all")}
-            />
-            {statusFilter !== "all" && (
-              <button type="button" onClick={() => setStatusFilter("all")} className="font-body text-xs font-medium text-[#1A6B52] hover:underline">
-                Clear filter
-              </button>
-            )}
-            <Button variant="secondary" size="md" leftIcon={<Download className="h-4 w-4" />} className="ml-auto">Export</Button>
+              <Dropdown<StatusFilter>
+                className="w-40"
+                placeholder="Filter status"
+                value={statusFilter === "all" ? null : statusFilter}
+                onChange={setStatusFilter}
+                options={STATUS_FILTER_OPTIONS.filter((o) => o.value !== "all")}
+              />
+              {statusFilter !== "all" && (
+                <button type="button" onClick={() => setStatusFilter("all")} className="font-body text-xs font-medium text-[#1A6B52] hover:underline">
+                  Clear filter
+                </button>
+              )}
+              <Button variant="secondary" size="md" leftIcon={<Download className="h-4 w-4" />} className="ml-auto"><span className="hidden sm:inline">Export</span></Button>
+            </div>
           </div>
 
           {activeTab === "calendar" ? (

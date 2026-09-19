@@ -15,7 +15,7 @@ export interface SegmentedTabsProps<T extends string = string> {
 
 export function SegmentedTabs<T extends string = string>({ options, value, onChange, className }: SegmentedTabsProps<T>) {
   return (
-    <div role="tablist" className={cn("inline-flex items-center gap-1 rounded-full border border-[#E5E7EB] bg-white p-1", className)}>
+    <div role="tablist" className={cn("inline-flex max-w-full overflow-x-auto items-center gap-1 rounded-full border border-[#E5E7EB] bg-white p-1", className)}>
       {options.map((option) => {
         const isActive = option.value === value;
         return (

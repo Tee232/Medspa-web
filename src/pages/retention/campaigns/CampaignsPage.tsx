@@ -194,7 +194,7 @@ export function CampaignsPage() {
           <p className="mt-0.5 font-body text-sm text-[#6B7280]">AI-generated re-engagement campaigns, editable before launch.</p>
         </div>
         <Button variant="primary" size="md" leftIcon={<Plus className="h-4 w-4" />} onClick={handleOpenNewWizard}>
-          New Campaign
+          <span className="hidden sm:inline">New Campaign</span>
         </Button>
       </div>
 

@@ -180,9 +180,9 @@ export function ClientProfilePage() {
             </div>
 
             <div className="flex items-center gap-2">
-              <Button variant="secondary" size="sm" leftIcon={<Pencil className="h-4 w-4" />} onClick={() => setEditOpen(true)}>Edit</Button>
-              <Button variant="danger" size="sm" leftIcon={<Ban className="h-4 w-4" />} onClick={() => setDeactivateOpen(true)}>Deactivate</Button>
-              <Button variant="primary" size="sm" leftIcon={<FileText className="h-4 w-4" />} onClick={() => setAllNotesOpen(true)}>Clinical Notes</Button>
+              <Button variant="secondary" size="sm" leftIcon={<Pencil className="h-4 w-4" />} onClick={() => setEditOpen(true)}><span className="hidden sm:inline">Edit</span></Button>
+              <Button variant="danger" size="sm" leftIcon={<Ban className="h-4 w-4" />} onClick={() => setDeactivateOpen(true)}><span className="hidden sm:inline">Deactivate</span></Button>
+              <Button variant="primary" size="sm" leftIcon={<FileText className="h-4 w-4" />} onClick={() => setAllNotesOpen(true)}><span className="hidden sm:inline">Clinical Notes</span></Button>
             </div>
           </div>
 

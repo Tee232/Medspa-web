@@ -57,7 +57,7 @@ export function SignupPage() {
   return (
     <div className="flex min-h-screen w-full flex-col md:flex-row bg-white font-body selection:bg-[#177A5C] selection:text-white">
       {/* LEFT PANEL: Form Section */}
-      <div className="flex w-full flex-col justify-between p-8 sm:p-12 md:w-1/2 lg:p-16 xl:p-20 overflow-y-auto">
+      <div className="flex w-full flex-col justify-between p-5 sm:p-10 md:w-1/2 lg:p-16 xl:p-20 overflow-y-auto">
         {/* Main Content Form Area */}
         <div className="my-auto py-8 max-w-md w-full mx-auto">
           {/* Top Header Branding */}

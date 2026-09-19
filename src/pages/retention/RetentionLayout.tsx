@@ -12,7 +12,7 @@ export function RetentionLayout() {
     <div className="p-6 sm:p-8">
       <h1 className="mb-1 font-heading text-xl font-bold text-[#1C1C1A]">Retention</h1>
       <p className="mb-5 font-body text-sm text-[#6B7280]">At-risk clients, campaigns, and revenue performance.</p>
-      <nav className="mb-6 flex gap-1 border-b border-[#E8E4DF]">
+      <nav className="mb-6 flex gap-1 overflow-x-auto border-b border-[#E8E4DF]">
         {TABS.map((tab) => (
           <NavLink
             key={tab.to}

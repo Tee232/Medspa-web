@@ -74,12 +74,12 @@ export function AtRiskClientsPage() {
           <p className="mt-0.5 font-body text-sm text-[#6B7280]">Clients showing churn signals based on visit gap, LTV, and engagement score</p>
         </div>
         <Button variant="primary" size="md" leftIcon={<Plus className="h-4 w-4" />} id="new-campaign-btn" onClick={() => setCampaignWizardOpen(true)}>
-          Add Campaign
+          <span className="hidden sm:inline">Add Campaign</span>
         </Button>
       </div>
 
       {/* Summary cards */}
-      <div className="mb-6 grid grid-cols-3 gap-3">
+      <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
         <SummaryCard label="Critical" count={summary.critical.length} stake={summary.criticalStake} color="text-[#DC2626]" />
         <SummaryCard label="High Risk" count={summary.high.length} stake={summary.highStake} color="text-[#F97316]" />
         <SummaryCard label="Medium Risk" count={summary.medium.length} stake={summary.mediumStake} color="text-[#EAB308]" />
@@ -104,26 +104,27 @@ export function AtRiskClientsPage() {
       </div>
 
       {/* Table */}
-      <div className="overflow-hidden rounded-2xl border border-[#E8E4DF] bg-white">
-        {/* Table head */}
-        <div className="grid grid-cols-[40px_2fr_1.2fr_1.4fr_1fr_0.8fr_1fr] items-center gap-2 border-b border-[#F0EDE8] bg-[#FAFAF9] px-4 py-3">
-          <div className="flex justify-center">
-            <input
-              type="checkbox"
-              checked={selected.size === filtered.length && filtered.length > 0}
-              onChange={toggleAll}
-              className="h-4 w-4 cursor-pointer rounded border-[#D1D5DB] accent-[#1A6B52]"
-              aria-label="Select all"
-            />
+      <div className="overflow-x-auto rounded-2xl border border-[#E8E4DF] bg-white">
+        <div className="min-w-[880px]">
+          {/* Table head */}
+          <div className="grid grid-cols-[40px_2fr_1.2fr_1.4fr_1fr_0.8fr_1fr] items-center gap-2 border-b border-[#F0EDE8] bg-[#FAFAF9] px-4 py-3">
+            <div className="flex justify-center">
+              <input
+                type="checkbox"
+                checked={selected.size === filtered.length && filtered.length > 0}
+                onChange={toggleAll}
+                className="h-4 w-4 cursor-pointer rounded border-[#D1D5DB] accent-[#1A6B52]"
+                aria-label="Select all"
+              />
+            </div>
+            {["CLIENT", "LAST VISIT", "RISK SCORE", "RISK LEVEL", "LTV", "STATUS"].map((h) => (
+              <p key={h} className="font-body text-[10px] font-semibold uppercase tracking-widest text-[#9CA3AF]">{h}</p>
+            ))}
           </div>
-          {["CLIENT", "LAST VISIT", "RISK SCORE", "RISK LEVEL", "LTV", "STATUS"].map((h) => (
-            <p key={h} className="font-body text-[10px] font-semibold uppercase tracking-widest text-[#9CA3AF]">{h}</p>
-          ))}
-        </div>
 
-        {/* Rows */}
-        <div className="divide-y divide-[#F0EDE8]">
-          {filtered.map((client) => {
+          {/* Rows */}
+          <div className="divide-y divide-[#F0EDE8]">
+            {filtered.map((client) => {
             const risk = RISK_CONFIG[client.riskLevel];
             const isChecked = selected.has(client.id);
             return (
@@ -189,6 +190,7 @@ export function AtRiskClientsPage() {
               </motion.div>
             );
           })}
+          </div>
         </div>
       </div>
 

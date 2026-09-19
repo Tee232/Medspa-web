@@ -117,7 +117,7 @@ export function AppShell() {
       </div>
 
       {/* Quick Role Switcher for testing RBAC views */}
-      <div className="fixed bottom-4 right-4 z-30 flex items-center gap-2 rounded-full border border-[#E8E4DF] bg-white px-3.5 py-2 shadow-lg">
+      <div className="fixed bottom-20 right-4 z-30 flex items-center gap-2 rounded-full border border-[#E8E4DF] bg-white px-3.5 py-2 shadow-lg xl:bottom-4">
         <span className="font-body text-[10px] font-semibold uppercase tracking-wide text-[#9CA3AF]">
           Role:
         </span>

@@ -79,8 +79,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } catch {
       // Fallback to null on storage error
     }
-    // Default logged in user for seamless initial demo, can logout anytime
-    return DEFAULT_USERS.front_desk;
+    // Unauthenticated by default until user logs in or valid session exists in storage
+    return null;
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
