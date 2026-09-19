@@ -1,0 +1,28 @@
+import type { AtRiskClient, FollowUpChannel, RiskLevel } from "./types";
+
+export const AT_RISK_CLIENTS: AtRiskClient[] = [
+  { id: "client-sophia", name: "Sophia Laurent", phone: "(310) 555-0142", email: "sophia@email.com", memberSinceLabel: "March 2023", lastVisit: "62 days ago", lastTreatment: "HydraFacial Deluxe", riskScore: 92, riskLevel: "Critical", ltv: 4680, visitCount: 14, aiRecommendation: "Send a personalized re-engagement message highlighting her loyalty and offering a complimentary add-on. Best window: Tuesday–Thursday 10–11 AM." },
+  { id: "client-mia", name: "Mia Chen", phone: "(424) 555-0837", email: "mia@email.com", memberSinceLabel: "June 2023", lastVisit: "48 days ago", lastTreatment: "Microneedling RF", riskScore: 79, riskLevel: "High", ltv: 4680, visitCount: 9, aiRecommendation: "Offer a loyalty tier upgrade or exclusive seasonal treatment to re-engage Mia before her next typical visit window lapses." },
+  { id: "client-elena", name: "Elena Vasquez", phone: "(310) 555-0201", email: "elena@email.com", memberSinceLabel: "January 2023", lastVisit: "41 days ago", lastTreatment: "Vitamin C Peel", riskScore: 64, riskLevel: "Critical", ltv: 4680, visitCount: 11, aiRecommendation: "Elena has not visited in over a month after previously visiting monthly. A personalized re-engagement message is likely to recover this relationship." },
+  { id: "client-ava", name: "Ava Thornton", phone: "(310) 555-0332", email: "ava@email.com", memberSinceLabel: "August 2023", lastVisit: "41 days ago", lastTreatment: "Laser Skin Resurfacing", riskScore: 92, riskLevel: "Critical", ltv: 4680, visitCount: 6, aiRecommendation: "Ava's visit frequency has slowed. Consider a check-in message ahead of her laser series renewal with a limited-time offer." },
+  { id: "client-priya", name: "Priya Mehta", phone: "(310) 555-0445", email: "priya@email.com", memberSinceLabel: "May 2024", lastVisit: "41 days ago", lastTreatment: "Re-engagement Consultation", riskScore: 79, riskLevel: "High", ltv: 4680, visitCount: 7, aiRecommendation: "Priya's visit cadence has dropped significantly. Recommend a retention campaign with a special offer before the relationship lapses further." },
+  { id: "client-isabella", name: "Isabella Ross", phone: "(310) 555-0559", email: "isabella@email.com", memberSinceLabel: "November 2024", lastVisit: "41 days ago", lastTreatment: "Vitamin IV Drip", riskScore: 43, riskLevel: "Medium", ltv: 4680, visitCount: 4, aiRecommendation: "Isabella is a newer client with strong early engagement. A membership upsell conversation could increase her LTV and lock in retention." },
+  { id: "client-camille", name: "Camille Dupont", phone: "(424) 555-1187", email: "camille@email.com", memberSinceLabel: "February 2023", lastVisit: "41 days ago", lastTreatment: "Dermal Filler Touch-Up", riskScore: 79, riskLevel: "High", ltv: 4680, visitCount: 12, aiRecommendation: "Camille is a consistent Platinum member. Remind her of upcoming treatment windows and introduce a new seasonal offering." },
+  { id: "client-rachel", name: "Rachel Kim", phone: "(424) 555-0612", email: "rachel@email.com", memberSinceLabel: "July 2024", lastVisit: "48 days ago", lastTreatment: "Skincare Consultation", riskScore: 50, riskLevel: "Medium", ltv: 4680, visitCount: 5, aiRecommendation: "Rachel's visits have become less frequent. A tailored check-in and personalised skincare update could help re-establish her routine." },
+  { id: "client-danielle", name: "Danielle Ford", phone: "(310) 555-0934", email: "danielle@email.com", memberSinceLabel: "September 2024", lastVisit: "48 days ago", lastTreatment: "Facial Consultation", riskScore: 79, riskLevel: "High", ltv: 4680, visitCount: 3, aiRecommendation: "Danielle has gone quiet after a strong start. Early outreach is recommended before risk escalates further." },
+  { id: "client-nadia", name: "Nadia Okafor", phone: "(424) 555-0671", email: "nadia@email.com", memberSinceLabel: "June 2026", lastVisit: "48 days ago", lastTreatment: "Skincare Follow-Up", riskScore: 39, riskLevel: "Medium", ltv: 4680, visitCount: 2, aiRecommendation: "Nadia is a new Platinum member with a strong start. Focus on a great second-visit experience and introduce a loyalty pathway." },
+];
+
+export const RISK_CONFIG: Record<RiskLevel, { color: string; bar: string; text: string; bg: string }> = {
+  Critical: { color: "text-[#DC2626]", bar: "bg-[#DC2626]", text: "Critical", bg: "bg-[#FEE2E2]" },
+  High:     { color: "text-[#F97316]", bar: "bg-[#F97316]", text: "High",     bg: "bg-[#FFF7ED]" },
+  Medium:   { color: "text-[#EAB308]", bar: "bg-[#EAB308]", text: "Medium",   bg: "bg-[#FEFCE8]" },
+};
+
+export function generateAIMessage(client: AtRiskClient, channel: FollowUpChannel): string {
+  const firstName = client.name.split(" ")[0];
+  if (channel === "SMS") {
+    return `Hi ${firstName}! We've been thinking about you at Lumiere. It's been a while since your last ${client.lastTreatment} and we'd love to welcome you back. Book this week and enjoy a complimentary skin consultation. Reply BOOK to get started or call (310) 555-0100. — The Lumiere Team`;
+  }
+  return `Hi ${firstName},\n\nWe hope you're doing wonderfully! We noticed it's been a little while since your last visit for your ${client.lastTreatment}, and the Lumiere team has been thinking of you.\n\nYour skin journey matters to us, and we'd love to help you maintain the beautiful results you've achieved. We're currently offering a complimentary skin consultation for returning clients this month.\n\nClick below to schedule your next appointment at a time that works for you.\n\nWith warmth,\nThe Lumiere Medspa Team`;
+}

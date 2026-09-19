@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/*
+  Design tokens — single source of truth is DesignSystem.md.
+  Do not hardcode these values inside components; reference the
+  Tailwind theme keys (e.g. `bg-primary`, `rounded-card`) instead.
+*/
+@theme {
+  --color-primary: #1a6b52;
+  --color-primary-hover: #145540;
+  --color-primary-active: #0f4534;
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-success: #16a34a;
+  --color-border: #e5e7eb;
+  --color-border-hover: #f3f4f6;
+  --color-disabled-bg: #d1d5db;
+  --color-disabled-text: #9ca3af;
+  --color-status-active-bg: #e8f4f0;
+  --color-status-active-text: #1a6b52;
+  --color-status-at-risk-bg: #fee2e2;
+  --color-status-at-risk-text: #dc2626;
+  --color-status-new-bg: #eff6ff;
+  --color-status-new-text: #1d4ed8;
+  --color-status-inactive-bg: #f3f4f6;
+  --color-status-inactive-text: #6b7280;
+
+  --font-heading: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 20px;
+  --radius-card-lg: 32px;
+  --radius-input: 12px;
+  --radius-button: 12px;
+  --radius-modal: 24px;
+  --radius-table: 16px;
+
+  --spacing-2: 8px;
+  --spacing-4: 16px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
